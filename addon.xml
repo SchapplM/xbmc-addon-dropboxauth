@@ -17,7 +17,7 @@
     <description lang="en_GB">Provide Dropbox Authentification</description>
     <platform>all</platform>
     <language/>
-    <license>Apache</license>
+    <license>MIT</license>
     <website></website>
     <source></source>
     <email></email>
