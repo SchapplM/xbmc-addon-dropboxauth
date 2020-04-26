@@ -7,7 +7,7 @@
 
 import xbmc, xbmcgui, xbmcaddon, xbmcvfs
 import os, sys
-from lib.dropbox import DropboxOAuth2FlowNoRedirect
+from dropbox import DropboxOAuth2FlowNoRedirect
 
 # PIL needed for QR code generation (source code from qr-code.py from service.linuxwhatelse.notify)
 '''
@@ -65,7 +65,7 @@ class MyClass(xbmcgui.WindowDialog):
         # Show the QR-Code in Kodi
         # http://www.programcreek.com/python/example/84322/xbmcgui.getCurrentWindowId
         utils.log('Add control image with %dx%d at (%d,%d)' % (screeny/2, screeny/2, 100, 100), xbmc.LOGDEBUG)
-        res_qr_code = [screeny/4, screeny/4] # TODO: the image is displayed bigger than the desired size. Find out why.
+        res_qr_code = [int(screeny/4), int(screeny/4)] # TODO: the image is displayed bigger than the desired size. Find out why.
         image = xbmcgui.ControlImage(100, 100, res_qr_code[0], res_qr_code[1], tmp_file)
         self.addControl(image)
     else:
@@ -76,6 +76,9 @@ class MyClass(xbmcgui.WindowDialog):
     self.addControl(xbmcgui.ControlLabel(x=100, y=(100+res_qr_code[1]+ 50), width=screenx, height=25, label=utils.getString(32704), textColor='0xFFFFFFFF'))
     self.addControl(xbmcgui.ControlLabel(x=100, y=(100+res_qr_code[1]+100), width=screenx, height=25, label=authorize_url, textColor='0xFFFFFFFF'))
     self.addControl(xbmcgui.ControlLabel(x=100, y=(100+res_qr_code[1]+150), width=screenx, height=25, label=utils.getString(32705), textColor='0xFFFFFFFF'))
+    
+    # Also print the text to the log file for manual use
+    utils.log('Open the following URL: %s' % authorize_url)
 
     # this shows the window on the screen
     self.show()
